@@ -1,7 +1,12 @@
+import { useState } from 'react'
 function App() {
   return (
     <div>
       <Folder name="Desktop">
+        <Folder name="Music">
+          <File name="all_star.mp4" />
+          <File name="express_file.mp4" />
+        </Folder>
         <File name="dogs.jpg" />
         <File name="cats.png" />
       </Folder>
@@ -11,12 +16,21 @@ function App() {
 }
 
 const Folder = (props) => {
-  console.log(props)
+  const [isOpen, setIsOpen] = useState(true)
+
+  const { name, children } = props
+
+  const handleClick = () => {
+    setIsOpen(!isOpen)
+  }
+
   return (
     <div>
-      <h3>{props.name}</h3>
+      <span style={{ cursor: 'pointer' }} onClick={handleClick}>
+        {name}
+      </span>
       <div style={{ marginLeft: '17px' }}>
-        <h4>{props.children}</h4>
+        <h4>{isOpen ? children : null}</h4>
       </div>
     </div>
   )
