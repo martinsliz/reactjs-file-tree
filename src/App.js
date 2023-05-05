@@ -20,9 +20,7 @@ const Folder = (props) => {
 
   const { name, children } = props
 
-  const handleClick = () => {
-    setIsOpen(!isOpen)
-  }
+  const handleClick = () => setIsOpen(!isOpen)
 
   return (
     <div>
