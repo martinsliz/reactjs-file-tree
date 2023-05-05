@@ -4,38 +4,57 @@ function App() {
     <div>
       <Folder name="Desktop">
         <Folder name="Music">
-          <File name="all_star.mp4" />
-          <File name="express_file.mp4" />
+          <File name="love_shack.mp4" />
+          <File name="hello.mp4" />
         </Folder>
         <File name="dogs.jpg" />
         <File name="cats.png" />
       </Folder>
-      <Folder name="Applications" />
+      <Folder name="Applications">
+        <File name="Calendar" />
+        <File name="Google Chrome" />
+        <File name="Microsoft Word" />
+      </Folder>
     </div>
   )
 }
 
 const Folder = (props) => {
   const [isOpen, setIsOpen] = useState(true)
-
   const { name, children } = props
+  const direction = isOpen ? 'down' : 'right'
 
-  const handleClick = () => setIsOpen(!isOpen)
+  const handleClick = () => {
+    setIsOpen(!isOpen)
+  }
 
   return (
     <div>
       <span style={{ cursor: 'pointer' }} onClick={handleClick}>
-        {name}
+        <i className="purple folder icon"></i>
+        <i className={`caret ${direction} icon`}></i>
       </span>
-      <div style={{ marginLeft: '17px' }}>
-        <h4>{isOpen ? children : null}</h4>
-      </div>
+      {name}
+      <div style={{ marginLeft: '17px' }}>{isOpen ? children : null}</div>
     </div>
   )
 }
 
 const File = (props) => {
-  return <div>{props.name}</div>
+  const { name } = props
+  const fileExtension = name.split('.')[1]
+  const fileIcons = {
+    mp4: 'headphones',
+    jpg: 'file image',
+    png: 'file image outline'
+  }
+  return (
+    <div>
+      <i className={`${fileIcons[fileExtension]} icon`}></i>
+
+      {name}
+    </div>
+  )
 }
 
 export default App
